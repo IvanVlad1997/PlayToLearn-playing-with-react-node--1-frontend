@@ -1,20 +1,33 @@
-import React, {ReactElement, useState} from "react";
+import React, {ReactElement, useEffect, useState} from "react";
 import KnobLRComponent from "../components/knobLR";
-import Canvas from '../components/canvas'
+
 import KnobUDComponent from "../components/knobUD";
+import CanvasComponent from "../components/canvas";
 
-
-const Doodle = (): ReactElement => {
+const Doodle = (props:any): ReactElement => {
     const [position, setPosition] = React.useState({x:180, y: 180});
     const [colorLine, setColorLine] = useState('black');
     const [colorBackground, setColorBackground] = useState('white');
+
     const handleTransferY = (value: number) => {
         console.log("y",value)
-        setPosition({x:position.x, y:position.y + value});
+        if (position.y <0) {
+            setPosition({x: position.x, y: 0});
+        } else if (position.y> 360) {
+            setPosition({x: position.x, y: 360});
+        } else {
+            setPosition({x: position.x, y: position.y + value});
+        }
     }
 
     const handleTransferX = (value: number) => {
-        setPosition({x:position.x + value, y:position.y});
+        if (position.x <0) {
+            setPosition({x: 0, y:position.y});
+        } else if (position.x > 360) {
+            setPosition({x: 360, y:position.y});
+        } else {
+            setPosition({x: position.x + value, y: position.y});
+        }
     }
 
     const buttonsLR = () => {
@@ -36,7 +49,8 @@ const Doodle = (): ReactElement => {
     const canvas = () => {
         return (
             <React.Fragment>
-                <Canvas colorLine={colorLine} colorBackground={colorBackground} position={position}/>
+                <CanvasComponent colorLine={colorLine} colorBackground={colorBackground} position={position}
+                                    name={props.match.params.name}></CanvasComponent>
             </React.Fragment>
         )
     }
