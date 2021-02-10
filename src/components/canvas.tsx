@@ -1,44 +1,59 @@
-import React, {Component, useEffect, useRef} from "react";
+import React, {Component, useEffect, useRef, useState} from "react";
 import "./canvas.css"
 import {deleteCanvas, loadCanvas, saveCanvas} from "../functions/interviu";
 
 
-const Canvas = () => {
+const Canvas = (props: any) => {
     const canvasRef = React.useRef(null);
-    const [position, setPosition] = React.useState({x: 5, y: 5});
-    // React.useEffect(() => {
-    //     setLine()
-    // }, []);
+    const [position, setPosition] = React.useState({x: props.position.x, y: props.position.y});
+
+
 
     React.useEffect(() => {
         const canvas = canvasRef.current as any ;
         const ctx = canvas.getContext('2d');
-        ctx.moveTo(position.x, position.y);
-        console.log(position)
+        ctx.moveTo(props.position.x, props.position.y);
     }, []);
 
-    // const setLine = () => {
-    //     const canvas = canvasRef.current as any;
-    //     const x = canvas.width;
-    //     const y = canvas.height;
-    //     setPosition({ x, y });
-    // }
+    // React.useEffect(() => {
+    //
+    //     moveLineX()
+    // }, [props.position.x])
+    // //
+    React.useEffect(() => {
+        moveLine()
+    }, [props.position])
 
+    React.useEffect(() => {
+        changeBackgroundColor()
+    }, [props.colorBackground])
+
+    React.useEffect(() => {
+        changeLineColor()
+    }, [props.colorLine])
+
+
+
+    const changeLineColor = () => {
+        const canvas = canvasRef.current as any ;
+        const ctx = canvas.getContext('2d');
+        ctx.strokeStyle = props.colorLine;
+    }
+
+    const changeBackgroundColor = () => {
+        const canvas = canvasRef.current as any ;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle= props.colorBackground;
+        ctx.fillRect(0, 0, 360, 360);
+    }
 
     const moveLine = () => {
         const canvas = canvasRef.current as any ;
         const ctx = canvas.getContext('2d');
-        // ctx.moveTo(0, 0);
-        ctx.lineTo(position.x-10, position.y-10);
-        setPosition({x:position.x + 100, y:position.y + 100});
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.lineTo(props.position.x, props.position.y);
+        setPosition({x:props.position.x, y:props.position.y});
         ctx.stroke();
-        console.log(position)
-        console.log(ctx)
-    }
-
-
-    function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void{
-      moveLine()
     }
 
      function handleSave() {
@@ -72,12 +87,14 @@ const Canvas = () => {
 
     }
 
+
+
     return (
         <React.Fragment>
-            <canvas ref={canvasRef} height={400} width={400}  className={"canvas"}/>
-            <button onClick={handleClick}>Down</button>
+            <canvas ref={canvasRef} height={360} width={360}  className={"canvas"}/>
             <button onClick={handleSave}>Save</button>
             <button onClick={loadData}>Load</button>
+
 
         </React.Fragment>
         )
