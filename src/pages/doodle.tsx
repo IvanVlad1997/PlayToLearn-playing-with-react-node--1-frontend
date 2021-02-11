@@ -57,13 +57,38 @@ const Doodle = (props:any): ReactElement => {
 
 
     return (
-        <div>
-            {buttonsLR()}
-            {buttonsUD()}
-            {canvas()}
-            <input type="color"  value={colorLine} onChange={e => setColorLine(e.target.value)} />
-            <input type="color" value={colorBackground} onChange={e => setColorBackground(e.target.value)} />
-        </div>
+            <div className="container mt-2">
+                <div className="row ">
+                    <div className="col-sm text-center ">
+                        {buttonsLR()}
+                    </div>
+                    <div className="col-sm">
+                    </div>
+                    <div className="col-sm">
+                        {buttonsUD()}
+                    </div>
+                </div>
+                <div className="row  justify-content-center">
+                    <div col-12-sm>
+                        {canvas()}
+
+                    </div>
+                </div>
+                <div className="row  justify-content-center">
+                    <div col-12-sm>
+                        <label>Schimbă culoarea liniei</label>
+                        <input  type="color"  value={colorLine} onChange={e => setColorLine(e.target.value)} />
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <label>Schimbă culoarea fundalului</label>
+                    <input  type="color" value={colorBackground} onChange={e => setColorBackground(e.target.value)} />
+                </div>
+            </div>
+
+
+
+
     )
 }
 

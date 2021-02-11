@@ -89,10 +89,25 @@ import {createCanvas, loadCanvas, updateCanvas} from "../functions/interviu";
 
     return (
         <React.Fragment>
-            <canvas ref={canvasRef} height={360} width={360}  className={"canvas"}/>
-            <button onClick={update}>Update</button>
-            <button onClick={loadData}>Load</button>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12-sm">
+                        <canvas ref={canvasRef} height={360} width={360}  className={"canvas"}/>
 
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col-12-sm">
+                        <button className="btn btn-primary" onClick={update}>Salvează modificările</button>
+                    </div>
+                </div>
+                {/*<div className="row justify-content-center" >*/}
+                {/*    <div className="col-12-sm">*/}
+                {/*        <button className="btn btn-primary" onClick={update}>Update</button>*/}
+
+                {/*    </div>*/}
+                {/*</div>*/}
+            </div>
 
         </React.Fragment>
         )

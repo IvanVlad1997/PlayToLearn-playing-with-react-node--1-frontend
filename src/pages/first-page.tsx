@@ -18,17 +18,26 @@ const FirstPageComponent = (): ReactElement => {
     }
     function list() {
         const listItems = canvas.map((c: any, index:number) =>
-            <div key={index}>
-                <li ><Link to={`/canvas/${c.name}`}>{c.name}</Link></li>
-                <button onClick={() => {
-                    fetchCanvas()
-                    removeCanvas(c.name)
-                }}>Remove</button>
+            <div key={index} className="container mt-2">
+                    <div className="row justify-content-center">
+                        <div style={{padding: "100px", border: "1px solid blue", borderRadius: "20px" }}>
+                            <Link to={`/canvas/${c.name}`}>{c.name}</Link>
+                        </div>
+                    </div>
+                <div className="row justify-content-center">
+                    <button className="btn btn-danger" onClick={() => {
+                        fetchCanvas()
+                        removeCanvas(c.name)
+                    }}>Remove</button>
+                </div>
             </div>
+
+
+
 
         );
         return (
-            <ul>{listItems}</ul>
+            <div>{listItems}</div>
         );
     }
    return (

@@ -33,10 +33,21 @@ export const NameInputComponent: React.FC<{}> = () => {
                     actions.setSubmitting(false);
                 }}
             >
-                <Form>
-                    <label htmlFor="name">New Project</label>
-                    <Field id="name" name="name" placeholder="Project Name" />
-                    <button type="submit">Crete</button>
+                <Form >
+                    <div className="container">
+                        <div className="row justify-content-center mt-3">
+                            <label htmlFor="name" className="h-50">Creează un proiect nou</label>
+                        </div>
+                        <div className="row justify-content-center mt-3">
+                            <Field  className="form-control " style={{width:"80%"}} id="name" name="name" placeholder="Nume proiect" />
+                        </div>
+                        <div className="row justify-content-center">
+                            <button className="btn btn-primary mt-3" type="submit">Creează</button>
+                        </div>
+                    </div>
+
+
+
                 </Form>
             </Formik>
         </div>
