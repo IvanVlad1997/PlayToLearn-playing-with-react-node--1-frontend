@@ -43,7 +43,8 @@ const FirstPageComponent = (): ReactElement => {
    return (
        <div>
           <NameInputComponent></NameInputComponent>
-           <div>{list()}</div>
+           { canvas && canvas.length > 0 ? <div>{list()}</div> : '' }
+
        </div>
    )
 }
